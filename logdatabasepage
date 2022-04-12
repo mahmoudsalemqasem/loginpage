@@ -1,0 +1,31 @@
+<?php
+
+    // require 'rit.php';
+    $con = mysqli_connect('localhost' , 'root' , '' , 'codeflix');
+    mysqli_select_db($con , "codeflix");
+    
+    if (isset($_POST['username'])&& isset($_POST['password'])&& isset($_POST['password_agin'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $password_agin = $_POST['password_agin'];
+        if (empty($username)|| empty($password)|| empty($password_agin)) {
+            echo "يجب عدم ترك اي حقل فارغ";
+        }
+        if ($password!==$password_agin) {
+            echo "كلمة السر غير متطابقة";
+        }
+        else {
+            mysqli_query($con , "INSERT INTO login VALUE('','$username','$password')");
+        }
+    }
+
+?>
+
+<form action="" method="post">
+
+    Username : <input type="text" name = "username"><br>
+    Password : <input type="text" name = "password"><br>
+    Password agin : <input type="text" name = "password_agin"><br>
+    <input type="submit" value = "send">
+
+</form>
